@@ -9,7 +9,7 @@ class ConectarMongoDB {
     async conectar() {
         // utiliza el metodo 'connect' para conectarse al servidor.
         await this.client.connect();
-        console.log('Conectado al servidor');
+        console.log('Conectado a mongo db');
         //devuelve el manejador de db
         const db = this.client.db(this.dbName);
         return db;
