@@ -38,7 +38,9 @@ class CamionDao {
 
         //const updateResult = await collection.updateOne({ patente: patente }, { $set: { codigo: 5 } });
         
-        const modificarResultado = collection.replaceOne({patente:pat},camion);
+        //const modificarResultado = collection.replaceOne({patente:pat},camion);
+
+        const modificarResultado = await collection.findOneAndReplace({patente:pat},camion)
 
         await this.conexion.desconectar();
         return (modificarResultado)

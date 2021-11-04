@@ -12,7 +12,7 @@ const camion1 = {
     patente: 'xyz123',
     kilometraje: 10000,
     ultimoServiceAceite: 5000,
-    ultimoServiceNeumatico: 2000,
+    ultimoServiceNeumatico: 3000,
     ulitmoServiceFiltro: 7000,
     enServicio: false,
 };
@@ -20,17 +20,16 @@ const camion1 = {
 // camionDao.agregar(camion1)
 //     .then (()=> console.log('camion agregado'),)
 //     .catch((error)=> console.error(error))
-//ejemplo de traer un camion de la BD.
-camionDao.buscarPorPatente('xyz123')
-    .then(camion => {
-    if (camion) {
-        console.log(camion);
-    }
-    else {
-        console.log('camion no encontrado');
-    }
-})
-    .catch(error => console.error(error));
+// //ejemplo de traer un camion de la BD.
+// camionDao.buscarPorPatente('xyz123')
+//     .then(camion=> {
+//         if (camion){
+//             console.log(camion)
+//         }else{
+//             console.log('camion no encontrado')
+//         }
+//         })
+//     .catch(error=> console.error (error))
 // //ejemplo de modificar un camion:
 // camionDao.buscarPorPatente('ijk123')
 //     .then(camion=> {

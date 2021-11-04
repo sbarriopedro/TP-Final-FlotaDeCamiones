@@ -21,7 +21,7 @@ const camion1:ICamion = {
     patente: 'xyz123',
     kilometraje: 10000,
     ultimoServiceAceite: 5000,
-    ultimoServiceNeumatico: 2000,
+    ultimoServiceNeumatico: 3000,
     ulitmoServiceFiltro: 7000,
     enServicio: false,   
 
@@ -68,7 +68,7 @@ const camion1:ICamion = {
 //     .then(()=>console.log ('el camion fue borrado'))
 //     .catch((error)=>console.error(error))
 
-
-// camionDao.modificar(camion1)
-//     .then(()=>console.log ('el camion fue modificado'))
-//     .catch((error)=>console.error(error))
+//ejemplo de modificar un camion
+camionDao.modificar(camion1)
+    .then(()=>console.log ('el camion fue modificado'))
+    .catch((error)=>console.error(error))
