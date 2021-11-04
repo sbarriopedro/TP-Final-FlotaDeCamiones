@@ -12,8 +12,9 @@ class CamionDao {
         const collection = db.collection('camiones');
         //codigo para insertar un documento:
         const insertOneResult = await collection.insertOne(camion);
+            
         await this.conexion.desconectar();
-        //return (insertOneResult)
+        return (insertOneResult)
     }
     
     // funcion buscarPorPatente: busca un camion segun patente.
@@ -21,23 +22,26 @@ class CamionDao {
         const db = await this.conexion.conectar();
         const collection = db.collection('camiones');
         
-        const camionEncontrado = await collection.find({ patente: pat }).toArray();
-
+        //const camionEncontrado = await collection.find({ patente: pat }).toArray();
+        
+        const camionEncontrado = await collection.findOne({patente: pat})
+        
         await this.conexion.desconectar();
-        return (camionEncontrado[0]);
+        return (camionEncontrado);
     }
 
     //funcion modificar: recibe un camion y lo reemplaza en la bd.
     async modificar(camion:ICamion){
         const db = await this.conexion.conectar();
         const collection = db.collection('camiones');
-        const patente = camion.patente;
+        const pat = camion.patente;
 
         //const updateResult = await collection.updateOne({ patente: patente }, { $set: { codigo: 5 } });
         
-        const modificarResultado = collection.replaceOne({patente:patente},camion);
+        const modificarResultado = collection.replaceOne({patente:pat},camion);
 
         await this.conexion.desconectar();
+        return (modificarResultado)
     }
 
 
@@ -49,6 +53,7 @@ class CamionDao {
         const deleteResult = await collection.deleteMany({ patente: patente });
     
         await this.conexion.desconectar();
+        return (deleteResult)
     }
 
 

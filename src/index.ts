@@ -27,9 +27,48 @@ const camion1:ICamion = {
 
 }
 
-//camionDao.agregar(camion1);
-//console.log (await camionDao.buscarPorPatente('xyz123'))
-//camionDao.borrar('ijk123')
-//console.log (await camionDao.getAll())
+// //ejemplo de agregar un camion:
+// camionDao.agregar(camion1)
+//     .then (()=> console.log('camion agregado'),)
+//     .catch((error)=> console.error(error))
 
-camionDao.modificar(camion1);
+// //ejemplo de traer un camion de la BD.
+// camionDao.buscarPorPatente('xyz123')
+//     .then(camion=> {
+//         if (camion){
+//             console.log(camion)
+//         }else{
+//             console.log('camion no encontrado')
+//         }
+//         })
+//     .catch(error=> console.error (error))
+
+
+// //ejemplo de modificar un camion:
+// camionDao.buscarPorPatente('ijk123')
+//     .then(camion=> {
+//         if (camion){
+//             camion.enServicio=true;  
+//             const camionAux:ICamion = {
+//                 patente: camion.patente,
+//                 kilometraje: camion.kilometraje,
+//                 ultimoServiceAceite: camion.ultimoServiceAceite,
+//                 ultimoServiceNeumatico: camion.ultimoServiceNeumatico,
+//                 ulitmoServiceFiltro: camion.ulitmoServiceFiltro,
+//                 enServicio: true   
+//             }
+//             camionDao.modificar(camionAux)
+//                 .then (()=> console.log ('el camion fue modificado'))
+//                 .catch(error=>console.error(error))
+//         }
+//     })
+
+// //ejemplo de borrar un camion
+// camionDao.borrar('ijk123')
+//     .then(()=>console.log ('el camion fue borrado'))
+//     .catch((error)=>console.error(error))
+
+
+// camionDao.modificar(camion1)
+//     .then(()=>console.log ('el camion fue modificado'))
+//     .catch((error)=>console.error(error))
