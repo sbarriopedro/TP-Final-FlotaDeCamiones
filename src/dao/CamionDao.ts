@@ -9,7 +9,7 @@ class CamionDao {
     //funcion agregar: agregar un camion.
     async agregar(camion: ICamion) {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         //codigo para insertar un documento:
         const insertOneResult = await collection.insertOne(camion);
             
@@ -20,7 +20,7 @@ class CamionDao {
     // funcion buscarPorPatente: busca un camion segun patente.
     async buscarPorPatente(pat:string){
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         
         //const camionEncontrado = await collection.find({ patente: pat }).toArray();
         
@@ -33,7 +33,7 @@ class CamionDao {
     //funcion modificar: recibe un camion y lo reemplaza en la bd.
     async modificar(camion:ICamion){
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         const pat = camion.patente;
 
         //const updateResult = await collection.updateOne({ patente: patente }, { $set: { codigo: 5 } });
@@ -50,7 +50,7 @@ class CamionDao {
     // funcion borrar: borra un camion segun la patente.
     async borrar (patente:string){
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
 
         const deleteResult = await collection.deleteMany({ patente: patente });
     
@@ -62,7 +62,7 @@ class CamionDao {
     //funcion getAll: trae todos los camiones
     async getAll() {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         //codigo para traerse todos los documentos:
         const findResult = await collection.find({}).toArray();
         await this.conexion.desconectar();

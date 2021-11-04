@@ -16,7 +16,7 @@ const camion1 = {
     ulitmoServiceFiltro: 7000,
     enServicio: false,
 };
-// //ejemplo de agregar un camion:
+//ejemplo de agregar un camion:
 // camionDao.agregar(camion1)
 //     .then (()=> console.log('camion agregado'),)
 //     .catch((error)=> console.error(error))
@@ -48,10 +48,14 @@ const camion1 = {
 //                 .catch(error=>console.error(error))
 //         }
 //     })
+const camion = await camionDao.agregar(camion1);
+console.log(camion);
 // //ejemplo de borrar un camion
 // camionDao.borrar('ijk123')
 //     .then(()=>console.log ('el camion fue borrado'))
 //     .catch((error)=>console.error(error))
-// camionDao.modificar(camion1)
+//ejemplo de modificar un camion
+// const camionAux = camionDao.buscarPorPatente('abc123')
+//  camionDao.modificar(camionAux)
 //     .then(()=>console.log ('el camion fue modificado'))
 //     .catch((error)=>console.error(error))

@@ -4,7 +4,7 @@ class CamionDao {
     //funcion agregar: agregar un camion.
     async agregar(camion) {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         //codigo para insertar un documento:
         const insertOneResult = await collection.insertOne(camion);
         await this.conexion.desconectar();
@@ -13,7 +13,7 @@ class CamionDao {
     // funcion buscarPorPatente: busca un camion segun patente.
     async buscarPorPatente(pat) {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         //const camionEncontrado = await collection.find({ patente: pat }).toArray();
         const camionEncontrado = await collection.findOne({ patente: pat });
         await this.conexion.desconectar();
@@ -22,7 +22,7 @@ class CamionDao {
     //funcion modificar: recibe un camion y lo reemplaza en la bd.
     async modificar(camion) {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         const pat = camion.patente;
         //const updateResult = await collection.updateOne({ patente: patente }, { $set: { codigo: 5 } });
         //const modificarResultado = collection.replaceOne({patente:pat},camion);
@@ -33,7 +33,7 @@ class CamionDao {
     // funcion borrar: borra un camion segun la patente.
     async borrar(patente) {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         const deleteResult = await collection.deleteMany({ patente: patente });
         await this.conexion.desconectar();
         return (deleteResult);
@@ -41,7 +41,7 @@ class CamionDao {
     //funcion getAll: trae todos los camiones
     async getAll() {
         const db = await this.conexion.conectar();
-        const collection = db.collection('camiones');
+        const collection = db.collection('Camiones');
         //codigo para traerse todos los documentos:
         const findResult = await collection.find({}).toArray();
         await this.conexion.desconectar();
