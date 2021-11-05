@@ -5,7 +5,7 @@ interface ICamion {
     ultimoServiceAceite: number,
     ultimoServiceNeumatico: number,
     ulitmoServiceFiltro: number,
-    enServicio: boolean,   
+    enTaller: boolean,   
 
 }
 

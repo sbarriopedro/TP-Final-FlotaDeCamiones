@@ -26,18 +26,21 @@ const camion1:ICamion = {
     ultimoServiceAceite: 5000,
     ultimoServiceNeumatico: 3000,
     ulitmoServiceFiltro: 7000,
-    enServicio: false,   
+    enTaller: false,   
 
 }
-await gestionCamion.crear(camion1)
+//await gestionCamion.crear(camion1)
 
 //const buscado= await gestionCamion.buscarPorPatente("3")
 //console.log(buscado)
 
-const borrar = await gestionCamion.borrarPorPatente("xyz123")
+//const borrar = await gestionCamion.borrarPorPatente("xyz123")
 
+//const taller=await gestionCamion.ingresoTaller("z123")
 
+//const modificar = await gestionCamion.servicio('z123',"aire")
 
+await gestionCamion.actualizarKilometraje("z123",342341)
 
 // //ejemplo de modificar un camion:
 // camionDao.buscarPorPatente('ijk123')
