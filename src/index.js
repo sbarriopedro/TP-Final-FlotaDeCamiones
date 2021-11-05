@@ -1,35 +1,20 @@
 // configurar variables de entorno:
 import * as dotenv from 'dotenv';
 dotenv.config();
-//Prueba de conexion:
-//const conexion =  new ConectarMongoDB()
-//await conexion.conectar()//si funciona escribe por consola "conectado a mongo".
-//await conexion.desconectar()//si funciona escribe por consola "desconectado".
-//prueba de CRUD de camion
-import { CamionDao } from './dao/CamionDao.js';
-const camionDao = new CamionDao();
+import { GestionCamion } from '../src/servicios/gestionCamion.js';
+const gestionCamion = new GestionCamion();
 const camion1 = {
-    patente: 'xyz123',
+    patente: 'z123',
     kilometraje: 10000,
     ultimoServiceAceite: 5000,
     ultimoServiceNeumatico: 3000,
     ulitmoServiceFiltro: 7000,
     enServicio: false,
 };
-//ejemplo de agregar un camion:
-// camionDao.agregar(camion1)
-//     .then (()=> console.log('camion agregado'),)
-//     .catch((error)=> console.error(error))
-// //ejemplo de traer un camion de la BD.
-// camionDao.buscarPorPatente('xyz123')
-//     .then(camion=> {
-//         if (camion){
-//             console.log(camion)
-//         }else{
-//             console.log('camion no encontrado')
-//         }
-//         })
-//     .catch(error=> console.error (error))
+await gestionCamion.crear(camion1);
+//const buscado= await gestionCamion.buscarPorPatente("3")
+//console.log(buscado)
+const borrar = await gestionCamion.borrarPorPatente("xyz123");
 // //ejemplo de modificar un camion:
 // camionDao.buscarPorPatente('ijk123')
 //     .then(camion=> {
@@ -48,12 +33,6 @@ const camion1 = {
 //                 .catch(error=>console.error(error))
 //         }
 //     })
-const camion = await camionDao.agregar(camion1);
-console.log(camion);
-// //ejemplo de borrar un camion
-// camionDao.borrar('ijk123')
-//     .then(()=>console.log ('el camion fue borrado'))
-//     .catch((error)=>console.error(error))
 //ejemplo de modificar un camion
 // const camionAux = camionDao.buscarPorPatente('abc123')
 //  camionDao.modificar(camionAux)

@@ -14,11 +14,14 @@ import { ConectarMongoDB } from "./dao/ConectarMongoDB.js";
 //prueba de CRUD de camion
 import { CamionDao } from './dao/CamionDao.js'
 import { ICamion } from './modelo/camion.js';
+import {GestionCamion} from '../src/servicios/gestionCamion.js';
 
-const camionDao = new CamionDao();
+
+
+const gestionCamion = new GestionCamion();
 
 const camion1:ICamion = {
-    patente: 'xyz123',
+    patente: 'z123',
     kilometraje: 10000,
     ultimoServiceAceite: 5000,
     ultimoServiceNeumatico: 3000,
@@ -26,22 +29,14 @@ const camion1:ICamion = {
     enServicio: false,   
 
 }
+await gestionCamion.crear(camion1)
 
-//ejemplo de agregar un camion:
-// camionDao.agregar(camion1)
-//     .then (()=> console.log('camion agregado'),)
-//     .catch((error)=> console.error(error))
+//const buscado= await gestionCamion.buscarPorPatente("3")
+//console.log(buscado)
 
-// //ejemplo de traer un camion de la BD.
-// camionDao.buscarPorPatente('xyz123')
-//     .then(camion=> {
-//         if (camion){
-//             console.log(camion)
-//         }else{
-//             console.log('camion no encontrado')
-//         }
-//         })
-//     .catch(error=> console.error (error))
+const borrar = await gestionCamion.borrarPorPatente("xyz123")
+
+
 
 
 // //ejemplo de modificar un camion:
@@ -63,13 +58,6 @@ const camion1:ICamion = {
 //         }
 //     })
 
- const camion = await camionDao.agregar(camion1)
-
- console.log (camion)
-// //ejemplo de borrar un camion
-// camionDao.borrar('ijk123')
-//     .then(()=>console.log ('el camion fue borrado'))
-//     .catch((error)=>console.error(error))
 
 //ejemplo de modificar un camion
 
