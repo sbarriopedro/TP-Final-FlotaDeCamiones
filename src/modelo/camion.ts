@@ -4,7 +4,7 @@ interface ICamion {
     kilometraje: number,
     ultimoServiceAceite: number,
     ultimoServiceNeumatico: number,
-    ulitmoServiceFiltro: number,
+    ultimoServiceFiltro: number,
     enTaller: boolean,   
 
 }

@@ -1,43 +1,35 @@
 // configurar variables de entorno:
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { GestionCamion } from '../src/servicios/gestionCamion.js';
-const gestionCamion = new GestionCamion();
-const camion1 = {
-    patente: 'z123',
-    kilometraje: 10000,
-    ultimoServiceAceite: 5000,
-    ultimoServiceNeumatico: 3000,
-    ulitmoServiceFiltro: 7000,
-    enTaller: false,
-};
-//await gestionCamion.crear(camion1)
-//const buscado= await gestionCamion.buscarPorPatente("3")
-//console.log(buscado)
-//const borrar = await gestionCamion.borrarPorPatente("xyz123")
-//const taller=await gestionCamion.ingresoTaller("z123")
-//const modificar = await gestionCamion.servicio('z123',"aire")
-await gestionCamion.actualizarKilometraje("z123", 342341);
-// //ejemplo de modificar un camion:
-// camionDao.buscarPorPatente('ijk123')
-//     .then(camion=> {
-//         if (camion){
-//             camion.enServicio=true;  
-//             const camionAux:ICamion = {
-//                 patente: camion.patente,
-//                 kilometraje: camion.kilometraje,
-//                 ultimoServiceAceite: camion.ultimoServiceAceite,
-//                 ultimoServiceNeumatico: camion.ultimoServiceNeumatico,
-//                 ulitmoServiceFiltro: camion.ulitmoServiceFiltro,
-//                 enServicio: true   
-//             }
-//             camionDao.modificar(camionAux)
-//                 .then (()=> console.log ('el camion fue modificado'))
-//                 .catch(error=>console.error(error))
-//         }
-//     })
-//ejemplo de modificar un camion
-// const camionAux = camionDao.buscarPorPatente('abc123')
-//  camionDao.modificar(camionAux)
-//     .then(()=>console.log ('el camion fue modificado'))
-//     .catch((error)=>console.error(error))
+import express from 'express';
+import morgan from 'morgan';
+import { crearRutasCamion } from './rutas/crearRutasCamion.js';
+const app = express();
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use('/api/camion', crearRutasCamion());
+const port = 3000;
+app.get('/test', (req, res) => {
+    res.send('ok');
+});
+app.listen(port, () => {
+    console.log('Sistema escuchando en ' + port);
+});
+//Prueba de conexion:
+//const conexion =  new ConectarMongoDB()
+//await conexion.conectar()//si funciona escribe por consola "conectado a mongo".
+//await conexion.desconectar()//si funciona escribe por consola "desconectado".
+//prueba de CRUD de camion
+// import { CamionDao } from './dao/CamionDao.js'
+// import { ICamion } from './modelo/camion.js';
+// import {GestionCamion} from '../src/servicios/gestionCamion.js';
+// // const gestionCamion = new GestionCamion();
+// const camion1:ICamion = {
+//     patente: 'z123',
+//     kilometraje: 10000,
+//     ultimoServiceAceite: 5000,
+//     ultimoServiceNeumatico: 3000,
+//     ulitmoServiceFiltro: 7000,
+//     enTaller: false,   
+// }
+//await gestionCamion.actualizarKilometraje("z123",342341)

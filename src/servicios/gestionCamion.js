@@ -50,7 +50,7 @@ class GestionCamion {
                     kilometraje: camion.kilometraje,
                     ultimoServiceAceite: camion.ultimoServiceAceite,
                     ultimoServiceNeumatico: camion.ultimoServiceNeumatico,
-                    ulitmoServiceFiltro: camion.ulitmoServiceFiltro,
+                    ultimoServiceFiltro: camion.ulitmoServiceFiltro,
                     enTaller: false
                 };
                 console.log(camion);
@@ -69,7 +69,7 @@ class GestionCamion {
                     kilometraje: camion.kilometraje,
                     ultimoServiceAceite: camion.ultimoServiceAceite,
                     ultimoServiceNeumatico: camion.ultimoServiceNeumatico,
-                    ulitmoServiceFiltro: camion.ulitmoServiceFiltro,
+                    ultimoServiceFiltro: camion.ulitmoServiceFiltro,
                     enTaller: true
                 };
                 console.log(camion);
@@ -88,7 +88,7 @@ class GestionCamion {
                     kilometraje: camion.kilometraje + km,
                     ultimoServiceAceite: camion.ultimoServiceAceite,
                     ultimoServiceNeumatico: camion.ultimoServiceNeumatico,
-                    ulitmoServiceFiltro: camion.ulitmoServiceFiltro,
+                    ultimoServiceFiltro: camion.ulitmoServiceFiltro,
                     enTaller: false
                 };
                 console.log(camion);
