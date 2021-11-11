@@ -32,15 +32,14 @@ class CamionDao {
     }
 
     //funcion modificar: recibe un camion y lo reemplaza en la bd.
-    async modificar(camion:ICamion){
+    async modificar(patente:string,camion:ICamion){
         try{
             const db = await this.conexion.conectar();
             const collection = db.collection('Camiones');
-            const pat = camion.patente;
-            await collection.findOneAndReplace({patente:pat},camion)
+            await collection.findOneAndReplace({patente},camion)
             await this.conexion.desconectar();
         }catch(e){
-            throw e
+            throw e 
         }
     }
 

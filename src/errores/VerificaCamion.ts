@@ -1,7 +1,22 @@
+import { nextTick } from 'process';
+import { CamionDao } from '../dao/CamionDao.js';
 import { CamionError } from './camionError.js';
 
 class VerificaCamion {
-    estudiante = { codigo: 0, nombre: '', edad: 0 };
+    
+    private camionDao:CamionDao = new CamionDao();
+
+    async verificarPatente (patente:string){
+        try {
+            const camion = await this.camionDao.buscarPorPatente (patente)
+            if (camion){
+                throw new CamionError ("El camion ya existe","DATO_EXISTENTE")
+            }
+        } catch (e) {
+            throw (e)
+        }
+    }
+
     verificarIntegridad(obj:any) {
         if (!obj.patente) {
             throw new CamionError("No existe campo patente", "DATO_INVALIDO");

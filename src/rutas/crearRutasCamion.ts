@@ -12,7 +12,8 @@ function crearRutasCamion() {
     const rutasCamion = express.Router()
     const camionDao:CamionDao = new CamionDao()
     
-    rutasCamion.get('/', async (req, res, next) => {
+    //trae todos:
+    rutasCamion.get('/getall', async (req, res, next) => {
         console.log('request recibido')
         try {
             const aCamiones = await camionDao.getAll()
@@ -22,14 +23,57 @@ function crearRutasCamion() {
         }
     })
 
-    rutasCamion.post('/', async (req, res, next) => {
+    //trae uno:
+    rutasCamion.get('/:patente', async (req,res)=>{
+        console.log ('GET request recibido')
+        try {
+            const camion = await camionDao.buscarPorPatente (req.params.patente)
+            res.json(camion)
+        } catch (e) {
+            throw e
+        }
+    } )
+
+    //agrega un camion:
+    rutasCamion.post('/agregar', async (req, res, next) => {
         console.log(req.body)
         try {
             verificaCamion.verificarIntegridad(req.body)
+            await verificaCamion.verificarPatente(req.body.patente)
             await camionDao.agregar(req.body)
             res.status(201).json(req.body)
         } catch(e) {
             next(e)
+        }
+    })
+
+    //borra un camion:
+    rutasCamion.delete('/:patente', async (req,res)=>{
+        console.log ('DELETE request recibido')
+        try {
+            await camionDao.borrar (req.params.patente)
+            res.json({
+                result:'ok',
+                patente: req.params.patente
+            })
+        } catch (e) {
+            throw e
+        }        
+    })
+
+    //reemplaza un camion, buscandolo por patente:
+    rutasCamion.put('/:patente', async (req,res)=>{
+        console.log ('PUT request recibido')
+        try {
+            await camionDao.modificar(req.params.patente,req.body)
+            res.json({
+                result:'ok',
+                patente: req.params.patente,
+                nuevoCamion: req.body
+            })
+        
+        } catch (e) {
+            throw e
         }
     })
 
