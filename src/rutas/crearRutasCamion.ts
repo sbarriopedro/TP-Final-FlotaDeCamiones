@@ -65,13 +65,19 @@ function crearRutasCamion() {
     rutasCamion.put('/:patente', async (req,res)=>{
         console.log ('PUT request recibido')
         try {
-            await camionDao.modificar(req.params.patente,req.body)
-            res.json({
-                result:'ok',
-                patente: req.params.patente,
-                nuevoCamion: req.body
-            })
-        
+            const camion = await camionDao.buscarPorPatente(req.params.patente)
+            if (camion){
+                await camionDao.modificar(req.params.patente,req.body)
+                res.json({
+                    result:'ok',
+                    patente: req.params.patente,
+                    nuevoCamion: req.body
+                })}
+            else{
+                res.json({
+                    result:'Camion Inexistente',
+                    patente: req.params.patente
+            })}
         } catch (e) {
             throw e
         }
