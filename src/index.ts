@@ -5,14 +5,21 @@ import { ConectarMongoDB } from "./dao/ConectarMongoDB.js";
 import express from "express";
 import morgan from "morgan";
 import { crearRutasCamion } from './rutas/crearRutasCamion.js';
+
 import { crearRutasEncargado } from './rutas/crearRutasEncargado.js';
+import { crearRutasChofer } from './rutas/crearRutasChofer.js';
+
 
 const app = express()
 app.use(morgan('tiny'))
 app.use(express.json())
 
 app.use('/api/camion', crearRutasCamion())
+
 app.use('/api/encargado', crearRutasEncargado())
+
+app.use('/api/chofer', crearRutasChofer())
+
 
 const port = 3000
 

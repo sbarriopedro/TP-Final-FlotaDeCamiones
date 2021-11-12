@@ -4,12 +4,20 @@ dotenv.config();
 import express from "express";
 import morgan from "morgan";
 import { crearRutasCamion } from './rutas/crearRutasCamion.js';
+<<<<<<< HEAD
 import { crearRutasEncargado } from './rutas/crearRutasEncargado.js';
+=======
+import { crearRutasChofer } from './rutas/crearRutasChofer.js';
+>>>>>>> ab76ca220291638c09ab3edbff923ad7ba41d46d
 const app = express();
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use('/api/camion', crearRutasCamion());
+<<<<<<< HEAD
 app.use('/api/encargado', crearRutasEncargado());
+=======
+app.use('/api/chofer', crearRutasChofer());
+>>>>>>> ab76ca220291638c09ab3edbff923ad7ba41d46d
 const port = 3000;
 app.get('/test', (req, res) => {
     res.send('ok');
