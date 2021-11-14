@@ -37,6 +37,20 @@ class VerificaCamion {
             throw new CamionError("No existe campo enTaller", "DATO_INVALIDO");
         }
     }
+
+    async verificarKM (patente:string,km:number){
+        try {
+            const camion = await this.camionDao.buscarPorPatente (patente)
+            if (camion){
+                if (camion.kilometraje > km)
+                throw new CamionError ("El kilometraje ingresado es menor al kilometraje actual","DATO_ERRONEO")
+            }
+        } catch (e) {
+            throw (e)
+        }
+    }
+    
+
 }
 export { VerificaCamion };
 

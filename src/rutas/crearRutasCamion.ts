@@ -2,15 +2,16 @@ import express from "express";
 import {CamionDao} from '../dao/CamionDao.js'
 import { CamionError } from '../errores/camionError.js'
 import {VerificaCamion} from '../errores/VerificaCamion.js'
+import {GestionCamion} from '../servicios/gestionCamion.js'
 
 //import {upload} from '../compartido/uploadNotas.js'
 
 function crearRutasCamion() {
 
-    const verificaCamion:VerificaCamion=new VerificaCamion()
-
-    const rutasCamion = express.Router()
-    const camionDao:CamionDao = new CamionDao()
+    const gestionCamion = new GestionCamion();
+    const verificaCamion:VerificaCamion=new VerificaCamion();
+    const rutasCamion = express.Router();
+    const camionDao:CamionDao = new CamionDao();
     
     //trae todos:
     rutasCamion.get('/getall', async (req, res, next) => {
@@ -64,40 +65,83 @@ function crearRutasCamion() {
     //reemplaza un camion, buscandolo por patente:
     rutasCamion.put('/:patente', async (req,res)=>{
         console.log ('PUT request recibido')
+
+        const patente = req.params.patente;
+        const nuevocamion = req.body;
+
         try {
-            const camion = await camionDao.buscarPorPatente(req.params.patente)
+            const camion = await camionDao.buscarPorPatente(patente)
             if (camion){
-                await camionDao.modificar(req.params.patente,req.body)
+                await camionDao.modificar(patente,nuevocamion)
                 res.json({
                     result:'ok',
-                    patente: req.params.patente,
-                    nuevoCamion: req.body
-                })}
-            else{
+                    patente: patente,
+                    nuevoCamion: nuevocamion
+                })
+            }else{
                 res.json({
                     result:'Camion Inexistente',
-                    patente: req.params.patente
-            })}
+                    patente: patente
+                })
+            }
         } catch (e) {
             throw e
         }
     })
 
-    // rutasCamion.post('/notas',upload.single('notas') , async (req, res, next) => {
-    //     try {
-    //         // console.log(req.file?.originalname)
+    //actualiza el kilometraje del camion:
+    rutasCamion.put ('/actualizarkm/',async (req,res)=>{
+        console.log ('PUT request recibido')
 
-    //         // 1- convertir a lista de notas
-    //         // 2- llamar de la base de datos notas
-    //         // 3- procesar
-    //         // 4- crear pdf
-    //         // 5- enviar el correo con el pdf
+        const nuevoKM = req.body.km;
+        const patente = req.body.patente;
 
-    //         res.status(201).json({mensaje:'ok'})
-    //     } catch(e) {
-    //         next(e)
-    //     }
-    // })
+        try {
+            const camion = await camionDao.buscarPorPatente (patente)
+            if (camion){
+                verificaCamion.verificarKM (patente, nuevoKM);
+                gestionCamion.actualizarKilometraje (patente, nuevoKM);
+                res.json ({
+                    result: 'ok',
+                    patente: patente,
+                    nuevoKM: nuevoKM
+                })
+            }else{
+                res.json({
+                    result: 'camion inexistente',
+                    patente: patente
+                })
+            }
+        } catch (e) {
+            throw e
+        }
+    })
+
+    //actualiza el kilometraje del ultimo service
+    rutasCamion.put ('actualizarservice', async (req,res)=>{
+        console.log ('PUT request recibido')
+
+        const service = req.body.service;
+        const patente = req.body.patente;
+
+        try {
+            const camion = await camionDao.buscarPorPatente(patente);
+            if (camion){
+                gestionCamion.actualizarService (patente,service);
+                res.json ({
+                    result:'ok',
+                    serviceActualizado: service
+                })
+            }else{
+                res.json({
+                    result: 'camion inexistente',
+                    patente: patente
+                })
+            }
+        } catch (e) {
+            throw e;
+        }
+    })
 
     rutasCamion.use( (error: any, req: any, res: any, next: any) => {
         if (error instanceof CamionError) {
