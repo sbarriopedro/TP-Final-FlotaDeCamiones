@@ -67,5 +67,20 @@ class CamionDao {
             throw e
         }
     }
+
+    //funcion traerCamionesEnTaller: trae todos los camiones en taller
+    async getCamionesEnTaller() {
+        try {
+            const db = await this.conexion.conectar();
+            const collection = db.collection('Camiones');
+            const findResult = await collection.find({enTaller:true}).toArray();
+            await this.conexion.desconectar();
+            return (findResult);            
+        } catch (e) {
+            throw e
+        }
+    }
+
+
 }
 export { CamionDao };

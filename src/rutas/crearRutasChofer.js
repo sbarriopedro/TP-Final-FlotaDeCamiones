@@ -19,13 +19,14 @@ function crearRutasChofer() {
         }
     });
     //trae uno:
-    rutasChofer.get('/:userId', async (req, res) => {
+    rutasChofer.get('/:userid', async (req, res) => {
         console.log('GET request recibido');
         try {
-            const chofer = await choferDao.buscarPorUserID(req.params.userId);
+            const chofer = await choferDao.buscarPorUserID(req.params.userid);
             res.json(chofer);
         }
         catch (e) {
+            0;
             throw e;
         }
     });

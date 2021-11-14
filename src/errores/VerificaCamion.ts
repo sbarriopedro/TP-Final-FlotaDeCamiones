@@ -38,19 +38,15 @@ class VerificaCamion {
         }
     }
 
-    async verificarKM (patente:string,km:number){
-        try {
-            const camion = await this.camionDao.buscarPorPatente (patente)
-            if (camion){
-                if (camion.kilometraje > km)
-                throw new CamionError ("El kilometraje ingresado es menor al kilometraje actual","DATO_ERRONEO")
-            }
-        } catch (e) {
-            throw (e)
-        }
-    }
-    
+    //verifica que al actualizar un kilometraje, este no sea menor que el actual.
+    verificarKM (kmActual:number,kmNuevo:number){
+        if (kmActual>kmNuevo){
+            return false;
+        }else{
+            return true;
+        } 
 
+    }
 }
 export { VerificaCamion };
 

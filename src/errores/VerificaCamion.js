@@ -33,6 +33,15 @@ class VerificaCamion {
             throw new CamionError("No existe campo enTaller", "DATO_INVALIDO");
         }
     }
+    //verifica que al actualizar un kilometraje, este no sea menor que el actual.
+    verificarKM(kmActual, kmNuevo) {
+        if (kmActual > kmNuevo) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }
 export { VerificaCamion };
 // {
