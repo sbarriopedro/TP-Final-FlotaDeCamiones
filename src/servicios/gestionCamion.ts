@@ -1,7 +1,7 @@
 import { ICamion } from "../modelo/camion"
 import {CamionDao} from '../dao/CamionDao.js'
 import { IService } from "../modelo/service"
-
+import {html} from '../compartido/templateHTML.js'
 class GestionCamion {
     private readonly ALARMA:number = 5000
     private camionDao : CamionDao = new CamionDao()
@@ -122,6 +122,17 @@ class GestionCamion {
             return (aServicesAVencer)
         } catch (e) {
             throw(e)
+        }
+    }
+
+
+    async generarPdfFlotaCamiones(){
+        try {
+            const aCamiones = await this.camionDao.getAll()
+            const arch:html=new html
+            arch.crearTemplateFlotaCamiones(aCamiones)
+        } catch (error) {
+            throw(error)
         }
     }
 

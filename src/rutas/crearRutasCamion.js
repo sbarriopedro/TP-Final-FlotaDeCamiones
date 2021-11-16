@@ -3,6 +3,7 @@ import { CamionDao } from '../dao/CamionDao.js';
 import { CamionError } from '../errores/camionError.js';
 import { VerificaCamion } from '../errores/VerificaCamion.js';
 import { GestionCamion } from '../servicios/gestionCamion.js';
+import { Pdf } from '../compartido/pdf.js';
 //import {upload} from '../compartido/uploadNotas.js'
 function crearRutasCamion() {
     const gestionCamion = new GestionCamion();
@@ -203,6 +204,23 @@ function crearRutasCamion() {
         }
         catch (e) {
             throw e;
+        }
+    });
+    rutasCamion.get('/pdfFlota', async (req, res) => {
+        console.log('GET request recibido: PDF flota camiones');
+        try {
+            await gestionCamion.generarPdfFlotaCamiones();
+            res.json('pdf  generado');
+        }
+        catch (e) {
+            throw e;
+        }
+        try {
+            const pdf = new Pdf;
+            pdf.crear();
+        }
+        catch (e) {
+            console.log(e);
         }
     });
     rutasCamion.get('/proxavencer', async (req, res) => {

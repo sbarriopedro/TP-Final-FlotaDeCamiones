@@ -3,6 +3,10 @@ import {CamionDao} from '../dao/CamionDao.js'
 import { CamionError } from '../errores/camionError.js'
 import {VerificaCamion} from '../errores/VerificaCamion.js'
 import {GestionCamion} from '../servicios/gestionCamion.js'
+import {Pdf} from '../compartido/pdf.js'
+import {html} from '../compartido/templateHTML.js'
+
+import { text } from "stream/consumers";
 
 //import {upload} from '../compartido/uploadNotas.js'
 
@@ -12,13 +16,16 @@ function crearRutasCamion() {
     const verificaCamion:VerificaCamion=new VerificaCamion();
     const rutasCamion = express.Router();
     const camionDao:CamionDao = new CamionDao();
-    
+   
+
     //trae todos:
     rutasCamion.get('/getall', async (req, res, next) => {
         console.log('request recibido: camion-getall')
         try {
             const aCamiones = await camionDao.getAll()
             res.json(aCamiones)
+            
+            
         } catch (e) {
             next(e)
         }
@@ -30,6 +37,7 @@ function crearRutasCamion() {
         try {
             const camion = await camionDao.buscarPorPatente (req.params.patente)
             res.json(camion)
+            
         } catch (e) {
             throw e
         }
@@ -211,6 +219,23 @@ function crearRutasCamion() {
         }
     })
 
+    rutasCamion.get ('/pdfFlota', async (req,res)=>{
+        console.log ('GET request recibido: PDF flota camiones')
+        try {
+             await gestionCamion.generarPdfFlotaCamiones();
+           res.json('pdf  generado')
+        } catch (e) {
+            throw e
+        }
+
+        try {
+            const pdf:Pdf = new Pdf
+            pdf.crear()
+           
+        } catch (e) {
+            console.log(e)
+    }
+    })  
     rutasCamion.get ('/proxavencer', async (req,res)=>{
         console.log ('GET request recibido: services proximos a vencer')
         try {
@@ -232,6 +257,9 @@ function crearRutasCamion() {
         }
     })
     return rutasCamion
+
+
+
 }
 
 export {crearRutasCamion}

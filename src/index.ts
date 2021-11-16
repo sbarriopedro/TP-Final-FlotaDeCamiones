@@ -8,6 +8,10 @@ import { crearRutasCamion } from './rutas/crearRutasCamion.js';
 
 import { crearRutasEncargado } from './rutas/crearRutasEncargado.js';
 import { crearRutasChofer } from './rutas/crearRutasChofer.js';
+import {html} from './compartido/templateHTML.js'
+import {Pdf} from './compartido/pdf.js'
+
+
 
 
 const app = express()
@@ -19,7 +23,6 @@ app.use('/api/camion', crearRutasCamion())
 app.use('/api/encargado', crearRutasEncargado())
 
 app.use('/api/chofer', crearRutasChofer())
-
 
 const port = 3000
 
