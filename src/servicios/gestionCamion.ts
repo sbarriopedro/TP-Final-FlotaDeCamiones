@@ -2,6 +2,7 @@ import { ICamion } from "../modelo/camion"
 import {CamionDao} from '../dao/CamionDao.js'
 import { IService } from "../modelo/service"
 import {html} from '../compartido/templateHTML.js'
+import { email } from "../compartido/email.js"
 class GestionCamion {
     private readonly ALARMA:number = 5000
     private camionDao : CamionDao = new CamionDao()
@@ -132,6 +133,15 @@ class GestionCamion {
             const arch:html=new html
             arch.crearTemplateFlotaCamiones(aCamiones)
         } catch (error) {
+            throw(error)
+        }
+    }
+
+    async enviarMail(){
+        try{
+            const mail:email= new email
+            mail.enviar()
+        }catch(error){
             throw(error)
         }
     }

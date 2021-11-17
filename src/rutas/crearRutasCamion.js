@@ -210,6 +210,7 @@ function crearRutasCamion() {
         console.log('GET request recibido: PDF flota camiones');
         try {
             await gestionCamion.generarPdfFlotaCamiones();
+            gestionCamion.enviarMail();
             res.json('pdf  generado');
         }
         catch (e) {

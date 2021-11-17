@@ -2,6 +2,9 @@ declare global {
     namespace NodeJS {
       interface ProcessEnv {
         CNX_STR: string;
+        EMAILUSUARIO: string;
+        EMAILPASSWORD: string;
+
       }
     }
   }

@@ -1,5 +1,6 @@
 import { CamionDao } from '../dao/CamionDao.js';
 import { html } from '../compartido/templateHTML.js';
+import { email } from "../compartido/email.js";
 class GestionCamion {
     ALARMA = 5000;
     camionDao = new CamionDao();
@@ -111,6 +112,15 @@ class GestionCamion {
             const aCamiones = await this.camionDao.getAll();
             const arch = new html;
             arch.crearTemplateFlotaCamiones(aCamiones);
+        }
+        catch (error) {
+            throw (error);
+        }
+    }
+    async enviarMail() {
+        try {
+            const mail = new email;
+            mail.enviar();
         }
         catch (error) {
             throw (error);

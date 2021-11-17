@@ -5,6 +5,7 @@ import {VerificaCamion} from '../errores/VerificaCamion.js'
 import {GestionCamion} from '../servicios/gestionCamion.js'
 import {Pdf} from '../compartido/pdf.js'
 import {html} from '../compartido/templateHTML.js'
+import {email} from '../compartido/email.js'
 
 import { text } from "stream/consumers";
 
@@ -222,7 +223,8 @@ function crearRutasCamion() {
     rutasCamion.get ('/pdfFlota', async (req,res)=>{
         console.log ('GET request recibido: PDF flota camiones')
         try {
-             await gestionCamion.generarPdfFlotaCamiones();
+             await gestionCamion.generarPdfFlotaCamiones()
+             gestionCamion.enviarMail()
            res.json('pdf  generado')
         } catch (e) {
             throw e
